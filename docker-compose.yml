@@ -5,3 +5,12 @@ services:
     ports:
       - "8000:8080"
     container_name: spring-server
+  db-postgres:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: P@ssw0rd
+      POSTGRES_DB: app-database
+    ports:
+      - "5432:5432"
+    container_name: db-postgres
