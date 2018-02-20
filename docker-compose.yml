@@ -1,13 +1,14 @@
 version: '3'
 services:
   spring-server:
-    build: ""
+    build: .
     depends_on:
-          - db-postgres
+      - db-postgres
     ports:
       - "8000:8080"
     container_name: spring-server
-    command: ["/wait-for-it.sh", "db-postgres:5432", "--strict", "--", "java", "-jar", "/app.jar"]
+    volumes:
+      - ${PROJECT_PATH}/src/main/resources/wait-for-it:/wait-for-it
   db-postgres:
     image: postgres:9.6
     environment:
@@ -17,3 +18,13 @@ services:
     ports:
       - "5432:5432"
     container_name: db-postgres
+  flyway:
+    build: ./flyway
+    volumes:
+      - ${PROJECT_PATH}/flyway/sql:/flyway/sql
+      - ${PROJECT_PATH}/src/main/resources/wait-for-it:/wait-for-it
+      - ${PROJECT_PATH}/flyway/conf:/flyway/conf
+    depends_on:
+      - db-postgres
+    container_name: flyway
+    tty: true
