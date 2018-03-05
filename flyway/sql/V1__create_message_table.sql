@@ -1,0 +1,6 @@
+CREATE TABLE message (
+    id BIGINT NOT NULL PRIMARY KEY,
+    text VARCHAR(200)
+);
+
+CREATE SEQUENCE "message-seq" START 1;
