@@ -3,13 +3,13 @@ services:
   spring-server:
     build: .
     depends_on:
-      - db-postgres
+      - postgres
     ports:
       - "8000:8080"
     container_name: spring-server
     volumes:
       - ${PROJECT_PATH}/src/main/resources/wait-for-it:/wait-for-it
-  db-postgres:
+  postgres:
     image: postgres:9.6
     environment:
       POSTGRES_USER: admin
@@ -25,6 +25,6 @@ services:
       - ${PROJECT_PATH}/src/main/resources/wait-for-it:/wait-for-it
       - ${PROJECT_PATH}/flyway/conf:/flyway/conf
     depends_on:
-      - db-postgres
+      - postgres
     container_name: flyway
     tty: true
