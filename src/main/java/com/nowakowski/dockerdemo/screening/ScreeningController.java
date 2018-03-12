@@ -1,7 +1,7 @@
-package com.nowakowski.dockerdemo.message;
+package com.nowakowski.dockerdemo.screening;
 
 import com.google.common.base.Preconditions;
-import com.nowakowski.dockerdemo.model.Message;
+import com.nowakowski.dockerdemo.model.Screening;
 import com.nowakowski.dockerdemo.util.RestPreconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,41 +20,41 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "message")
- class MessageController {
+ class ScreeningController {
 
-    private final MessageService service;
+    private final ScreeningService service;
 
     @Autowired
-    public MessageController(MessageService service) {
+    public ScreeningController(ScreeningService service) {
         this.service = service;
     }
 
     @GetMapping
     @ResponseBody
-    public List<Message> retrieveAll() {
+    public List<Screening> retrieveAll() {
         return service.findAll();
     }
 
     @GetMapping(value = "/{id}")
     @ResponseBody
-    public Message retrieveOne(@PathVariable("id") Long id) {
+    public Screening retrieveOne(@PathVariable("id") Long id) {
         return RestPreconditions.checkFound(service.findOneBy(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public Long create(@RequestBody Message message) {
-        Preconditions.checkNotNull(message);
-        return service.create(message).getId();
+    public Long create(@RequestBody Screening screening) {
+        Preconditions.checkNotNull(screening);
+        return service.create(screening).getId();
     }
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("id") Long id, @RequestBody Message message) {
-        Preconditions.checkNotNull(message);
-        RestPreconditions.checkFound(service.findOneBy(message.getId()));
-        service.update(message);
+    public void update(@PathVariable("id") Long id, @RequestBody Screening screening) {
+        Preconditions.checkNotNull(screening);
+        RestPreconditions.checkFound(service.findOneBy(screening.getId()));
+        service.update(screening);
     }
 
     @DeleteMapping(value = "/{id}")

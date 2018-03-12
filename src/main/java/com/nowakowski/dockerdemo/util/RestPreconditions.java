@@ -1,6 +1,6 @@
 package com.nowakowski.dockerdemo.util;
 
-import com.nowakowski.dockerdemo.exceptions.MyResourceNotFoundException;
+import com.nowakowski.dockerdemo.exceptions.ScreeningNotFoundException;
 
 public class RestPreconditions {
 
@@ -10,7 +10,7 @@ public class RestPreconditions {
 
     public static <T> T checkFound(T resource) {
         if (resource == null) {
-            throw new MyResourceNotFoundException();
+            throw new ScreeningNotFoundException();
         }
         return resource;
     }
