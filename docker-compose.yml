@@ -1,14 +1,14 @@
 version: '3'
 services:
   screening-server:
-    build: ./screeningServer
+    build: ./screening-server
     depends_on:
       - postgres
     ports:
       - "8000:8080"
     container_name: spring-server
     volumes:
-      - ${PROJECT_PATH}/screeningServer/src/main/resources/wait-for-it:/wait-for-it
+      - ${PROJECT_PATH}/screening-server/src/main/resources/wait-for-it:/wait-for-it
   postgres:
     image: postgres:9.6
     environment:
@@ -22,7 +22,7 @@ services:
     build: ./flyway
     volumes:
       - ${PROJECT_PATH}/flyway/sql:/flyway/sql
-      - ${PROJECT_PATH}/screeningServer/src/main/resources/wait-for-it:/wait-for-it
+      - ${PROJECT_PATH}/screening-server/src/main/resources/wait-for-it:/wait-for-it
       - ${PROJECT_PATH}/flyway/conf:/flyway/conf
     depends_on:
       - postgres
