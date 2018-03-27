@@ -4,18 +4,24 @@
     
 1. Separate dockers for:
     * screening server
-    * screening parser
     * postgresql database
     * flyway to populate database structures
-2. screeningServer:
+    * TODO:
+        * screening-parser
+        * screening-api
+2. screening-server:
     * spring-boot controller-service-repository
     * flyway creating structure
     * hibernate synchronized with flyway structure
-3. screeningParser:
+3. screening-parser:
+    * hibernate synchronized with flyway structure
+    * connected with screening-api module
     * TODO
         * Dockerfile
         * functionality
-4. TODO:
+4. screening-api:
+    * common screening model for other modules         
+5. TODO:
     * move wait-for-it to global resource folder
     * write parent pom
     * connect poms
